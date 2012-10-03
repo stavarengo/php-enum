@@ -24,13 +24,13 @@ abstract class Enum
     	$reflect = new ReflectionClass($class);
     	$properties = $reflect->getStaticProperties();
     	
-    	foreach ($properties as $property) {
-    		if (is_array($property)) {
-    			$newValue = new $class($property[0], $property[1]);
+    	foreach ($properties as $propName => $propValue) {
+    		if (is_array($propValue)) {
+    			$newValue = new $class($propValue[0], $propValue[1]);
     		} else {
-    			$newValue = new $class($property);
+    			$newValue = new $class($propValue);
     		}
-    		$reflect->setStaticPropertyValue('RED', $newValue);
+    		$reflect->setStaticPropertyValue($propName, $newValue);
     	}
     }
     
